@@ -1,1 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>我的工作导航</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<h1>我的工作导航</h1>
+
+<div class="search-box">
+  <input id="search" placeholder="搜索网站...">
+</div>
+
+<div id="nav"></div>
+
+<script src="data/sites.js"></script>
+<script>
+const searchInput = document.getElementById("search");
+searchInput.addEventListener("input", render);
+
+function render() {
+  const keyword = searchInput.value.trim().toLowerCase();
+  const nav = document.getElementById("nav");
+  nav.innerHTML = "";
+
+  const groups = {};
+
+  sites.forEach(site => {
+    const text = (site.name + site.url + site.category).toLowerCase();
+    if (keyword && !text.includes(keyword)) return;
+
+    if (!groups[site.category]) groups[site.category] = [];
+    groups[site.category].push(site);
+  });
+
+  Object.keys(groups).forEach(category => {
+    const section = document.createElement("div");
+    section.className = "category";
+
+    const title = document.createElement("h2");
+    title.textContent = category;
+    title.onclick = () => section.classList.toggle("collapsed");
+
+    const list = document.createElement("div");
+    list.className = "sites";
+
+    groups[category].forEach(site => {
+      const a = document.createElement("a");
+      a.href = site.url;
+      a.target = "_blank";
+      a.className = "site";
+
+      const icon = document.createElement("img");
+      icon.src = "https://www.google.com/s2/favicons?domain=" + new 网站(site.url).hostname;
+      icon.onerror = () => icon.remove();
+
+      const text = document.createElement("span");
+      text.textContent = site.name;
+
+      a.appendChild(icon);
+      a.appendChild(text);
+      list.appendChild(a);
+    });
+
+    section.appendChild(title);
+    section.appendChild(list);
+    nav.appendChild(section);
+  });
+}
+
+render();
+</script>
+
+</body>
+</html>
 
