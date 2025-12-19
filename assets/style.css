@@ -1,1 +1,52 @@
+body {
+  font-family: system-ui, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.search-box {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.search-box input {
+  padding: 8px 12px;
+  width: 260px;
+}
+
+.category {
+  margin-bottom: 25px;
+}
+
+.category h2 {
+  cursor: pointer;
+  border-left: 4px solid #3b82f6;
+  padding-left: 8px;
+}
+
+.category.collapsed .sites {
+  display: none;
+}
+
+.sites {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.site {
+  background: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
 
